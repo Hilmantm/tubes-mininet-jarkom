@@ -87,6 +87,54 @@ def configNetwork():
     net[ 'r3' ].cmd( 'sysctl net.ipv4.ip_forward=1' )
     net[ 'r4' ].cmd( 'sysctl net.ipv4.ip_forward=1' )
 
+    # Static routing
+    # 2 table karena terdapat 2 interface
+    # ha
+    net['ha'].cmd('ip rule add from 192.168.0.1 table 1')
+    net['ha'].cmd('ip rule add from 192.168.5.1 table 2')
+    net['ha'].cmd('ip route add 192.168.0.0/24 dev ha-eth0 scope link table 1')
+    net['ha'].cmd('ip route add default via 192.168.0.2 dev ha-eth0 table 1')
+    net['ha'].cmd('ip route add 192.168.5.0/24 dev ha-eth1 scope link table 2')
+    net['ha'].cmd('ip route add default via 192.168.5.2 dev ha-eth1 table 2')
+    net['ha'].cmd('ip route add default scope global nexthop via 192.168.0.2 dev ha-eth0')
+
+    # hb
+    net['hb'].cmd('ip rule add from 192.168.2.2 table 1')
+    net['hb'].cmd('ip rule add from 192.168.3.1 table 2')
+    net['hb'].cmd('ip route add 192.168.2.0/24 dev hb-eth0 scope link table 1')
+    net['hb'].cmd('ip route add default via 192.168.2.1 dev hb-eth0 table 1')
+    net['hb'].cmd('ip route add 192.168.3.0/24 dev hb-eth1 scope link table 2')
+    net['hb'].cmd('ip route add default via 192.168.3.2 dev hb-eth1 table 2')
+    net['hb'].cmd('ip route add default scope global nexthop via 192.168.3.2 dev hb-eth1')
+
+    # r1
+    net['r1'].cmd('route add -net 192.168.2.0/24 gw 192.168.1.2')
+    net['r1'].cmd('route add -net 192.168.3.0/24 gw 192.168.6.2')
+    net['r1'].cmd('route add -net 192.168.4.0/24 gw 192.168.6.2')
+    net['r1'].cmd('route add -net 192.168.5.0/24 gw 192.168.6.2')
+    net['r1'].cmd('route add -net 192.168.7.0/24 gw 192.168.1.2')
+
+    # r2
+    net['r2'].cmd('route add -net 192.168.0.0/24 gw 192.168.7.2')
+    net['r2'].cmd('route add -net 192.168.1.0/24 gw 192.168.7.2')
+    net['r2'].cmd('route add -net 192.168.2.0/24 gw 192.168.7.2')
+    net['r2'].cmd('route add -net 192.168.3.0/24 gw 192.168.4.1')
+    net['r2'].cmd('route add -net 192.168.6.0/24 gw 192.168.4.1')
+
+    # r3
+    net['r3'].cmd('route add -net 192.168.0.0/24 gw 192.168.1.1')
+    net['r3'].cmd('route add -net 192.168.3.0/24 gw 192.168.7.1')
+    net['r3'].cmd('route add -net 192.168.4.0/24 gw 192.168.7.1')
+    net['r3'].cmd('route add -net 192.168.5.0/24 gw 192.168.7.1')
+    net['r3'].cmd('route add -net 192.168.6.0/24 gw 192.168.1.1')
+
+    # r4
+    net['r4'].cmd('route add -net 192.168.0.0/24 gw 192.168.6.1')
+    net['r4'].cmd('route add -net 192.168.1.0/24 gw 192.168.6.1')
+    net['r4'].cmd('route add -net 192.168.2.0/24 gw 192.168.6.1')
+    net['r4'].cmd('route add -net 192.168.5.0/24 gw 192.168.4.2')
+    net['r4'].cmd('route add -net 192.168.7.0/24 gw 192.168.4.2')
+
     net.start()
 
     # ping all host
