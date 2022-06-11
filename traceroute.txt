@@ -1,0 +1,167 @@
+(1.00Mbit) (1.00Mbit) (0.50Mbit) (0.50Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) (0.50Mbit) (0.50Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) (1.00Mbit) *** Configuring hosts
+r1 r2 r3 r4 ha hb 
+*** Starting controller
+
+*** Starting 0 switches
+
+*** Ping: testing ping reachability
+r1 -> X X X X X 
+r2 -> X X X X X 
+r3 -> X X X X X 
+r4 -> X X X X X 
+ha -> X X X X X 
+hb -> X X X X X 
+*** Results: 100% dropped (0/30 received)
+
+ 100.0 
+*** Starting CLI:
+mininet> ha traceroute r1
+traceroute to 192.168.0.2 (192.168.0.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.314 ms  0.256 ms  0.234 ms
+mininet> ha traceroute r2
+traceroute to 192.168.4.2 (192.168.4.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.700 ms  0.631 ms  0.603 ms
+ 2  192.168.6.2 (192.168.6.2)  0.578 ms  0.509 ms  0.476 ms
+ 3  192.168.4.2 (192.168.4.2)  0.448 ms  0.355 ms  0.317 ms
+mininet> ha traceroute r3
+traceroute to 192.168.1.2 (192.168.1.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.873 ms  0.742 ms  0.666 ms
+ 2  192.168.1.2 (192.168.1.2)  0.615 ms  0.532 ms  0.466 ms
+mininet> ha traceroute r4
+traceroute to 192.168.3.2 (192.168.3.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.419 ms  0.361 ms  0.335 ms
+ 2  192.168.3.2 (192.168.3.2)  0.314 ms  0.278 ms  0.253 ms
+mininet> ha traceroute hb
+traceroute to 192.168.2.2 (192.168.2.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.404 ms  0.335 ms  1.169 ms
+ 2  192.168.1.2 (192.168.1.2)  1.158 ms  1.146 ms  1.136 ms
+ 3  192.168.2.2 (192.168.2.2)  1.124 ms  1.112 ms  1.100 ms
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> r1 traceroute ha
+traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets
+ 1  192.168.0.1 (192.168.0.1)  0.517 ms  0.433 ms  0.402 ms
+mininet> r1 traceroute r2
+traceroute to 192.168.4.2 (192.168.4.2), 30 hops max, 60 byte packets
+ 1  192.168.6.2 (192.168.6.2)  0.501 ms  0.428 ms  0.402 ms
+ 2  192.168.4.2 (192.168.4.2)  0.380 ms  0.339 ms  0.312 ms
+mininet> r1 traceroute r3
+traceroute to 192.168.1.2 (192.168.1.2), 30 hops max, 60 byte packets
+ 1  192.168.1.2 (192.168.1.2)  0.428 ms  0.366 ms  0.344 ms
+mininet> r1 traceroute r4
+traceroute to 192.168.3.2 (192.168.3.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.402 ms  0.339 ms  0.314 ms
+mininet> r1 traceroute hb
+traceroute to 192.168.2.2 (192.168.2.2), 30 hops max, 60 byte packets
+ 1  192.168.1.2 (192.168.1.2)  0.489 ms  0.425 ms  0.400 ms
+ 2  192.168.2.2 (192.168.2.2)  0.379 ms  0.336 ms  0.308 ms
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> r2 traceroute ha
+traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets
+ 1  192.168.7.2 (192.168.7.2)  0.484 ms  0.384 ms  0.358 ms
+ 2  192.168.1.1 (192.168.1.1)  0.338 ms  0.299 ms  0.272 ms
+ 3  192.168.0.1 (192.168.0.1)  0.247 ms  1.182 ms  1.170 ms
+mininet> r2 traceroute r1
+traceroute to 192.168.0.2 (192.168.0.2), 30 hops max, 60 byte packets
+ 1  192.168.7.2 (192.168.7.2)  0.336 ms  0.284 ms  0.268 ms
+ 2  192.168.0.2 (192.168.0.2)  0.254 ms  0.227 ms  0.207 ms
+mininet> r2 traceroute r3
+traceroute to 192.168.1.2 (192.168.1.2), 30 hops max, 60 byte packets
+ 1  192.168.1.2 (192.168.1.2)  0.342 ms  0.286 ms  0.266 ms
+mininet> r2 traceroute r4
+traceroute to 192.168.3.2 (192.168.3.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.340 ms  0.280 ms  0.261 ms
+mininet> r2 traceroute hb
+traceroute to 192.168.2.2 (192.168.2.2), 30 hops max, 60 byte packets
+ 1  192.168.7.2 (192.168.7.2)  0.462 ms  0.400 ms  0.375 ms
+ 2  192.168.2.2 (192.168.2.2)  0.355 ms  0.314 ms  0.288 ms
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> r3 traceroute ha
+traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets
+ 1  192.168.1.1 (192.168.1.1)  0.535 ms  0.464 ms  0.440 ms
+ 2  192.168.0.1 (192.168.0.1)  0.418 ms  0.375 ms  0.346 ms
+mininet> r3 traceroute r1
+traceroute to 192.168.0.2 (192.168.0.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.454 ms  0.392 ms  0.370 ms
+mininet> r3 traceroute r2
+traceroute to 192.168.4.2 (192.168.4.2), 30 hops max, 60 byte packets
+ 1  192.168.4.2 (192.168.4.2)  0.423 ms  0.360 ms  0.335 ms
+mininet> r3 traceroute r4
+traceroute to 192.168.3.2 (192.168.3.2), 30 hops max, 60 byte packets
+ 1  192.168.7.1 (192.168.7.1)  0.607 ms  0.525 ms *
+ 2  192.168.3.2 (192.168.3.2)  0.468 ms  0.418 ms  0.383 ms
+mininet> r3 traceroute hb
+traceroute to 192.168.2.2 (192.168.2.2), 30 hops max, 60 byte packets
+ 1  192.168.2.2 (192.168.2.2)  0.292 ms  0.237 ms  0.221 ms
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> r4 traceroute ha
+traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets
+ 1  192.168.6.1 (192.168.6.1)  0.532 ms  0.461 ms  0.437 ms
+ 2  192.168.0.1 (192.168.0.1)  0.416 ms  0.373 ms  0.343 ms
+mininet> r4 traceroute r1
+traceroute to 192.168.0.2 (192.168.0.2), 30 hops max, 60 byte packets
+ 1  192.168.0.2 (192.168.0.2)  0.560 ms  0.479 ms  0.445 ms
+mininet> r4 traceroute r2
+traceroute to 192.168.4.2 (192.168.4.2), 30 hops max, 60 byte packets
+ 1  192.168.4.2 (192.168.4.2)  0.549 ms  0.477 ms  0.447 ms
+mininet> r4 traceroute r3
+traceroute to 192.168.1.2 (192.168.1.2), 30 hops max, 60 byte packets
+ 1  192.168.6.1 (192.168.6.1)  0.445 ms  0.370 ms  0.348 ms
+ 2  192.168.1.2 (192.168.1.2)  0.327 ms  0.291 ms  0.266 ms
+mininet> r4 traceroute hb
+traceroute to 192.168.2.2 (192.168.2.2), 30 hops max, 60 byte packets
+ 1  192.168.6.1 (192.168.6.1)  0.445 ms  0.386 ms *
+ 2  192.168.1.2 (192.168.1.2)  0.348 ms  0.317 ms *
+ 3  192.168.2.2 (192.168.2.2)  0.275 ms  0.237 ms  0.211 ms
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> 
+mininet> hb traceroute ha
+traceroute to 192.168.0.1 (192.168.0.1), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.639 ms  0.568 ms  0.544 ms
+ 2  192.168.6.1 (192.168.6.1)  0.522 ms  0.482 ms  0.454 ms
+ 3  192.168.0.1 (192.168.0.1)  0.425 ms  0.370 ms  0.332 ms
+mininet> hb traceroute r1
+traceroute to 192.168.0.2 (192.168.0.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.497 ms  0.434 ms  0.408 ms
+ 2  192.168.0.2 (192.168.0.2)  0.386 ms  0.346 ms  0.316 ms
+mininet> hb traceroute r2
+traceroute to 192.168.4.2 (192.168.4.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.553 ms  0.482 ms  0.450 ms
+ 2  192.168.4.2 (192.168.4.2)  0.424 ms  0.376 ms  0.344 ms
+mininet> hb traceroute r3
+traceroute to 192.168.1.2 (192.168.1.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.511 ms  0.449 ms  0.427 ms
+ 2  192.168.6.1 (192.168.6.1)  0.408 ms  0.374 ms  0.349 ms
+ 3  192.168.1.2 (192.168.1.2)  0.327 ms  0.281 ms  0.250 ms
+mininet> hb traceroute r4
+traceroute to 192.168.3.2 (192.168.3.2), 30 hops max, 60 byte packets
+ 1  192.168.3.2 (192.168.3.2)  0.354 ms  0.289 ms  0.261 ms
+mininet> 
+mininet> 
+mininet> xterm h1
+node 'h1' not in network
+mininet> 
+mininet> xterm ha
+mininet> xterm ha
+mininet> 
+mininet> 
+mininet> 
+mininet> exit
