@@ -23,15 +23,17 @@ def configNetwork():
     net.addHost("ha")
     net.addHost("hb")
 
+    MAX_QUEUE_SIZE = 100
+
     # Add Link
-    net.addLink( net[ 'ha' ], net[ 'r1' ], intfName1='ha-eth0', intfName2='r1-eth0', cls=TCLink, bw=1 ) # NET 1
-    net.addLink( net[ 'r1' ], net[ 'r3' ], intfName1='r1-eth1', intfName2='r3-eth1', cls=TCLink, bw=0.5 ) # NET 2
-    net.addLink( net[ 'r3' ], net[ 'hb' ], intfName1='r3-eth0', intfName2='hb-eth0', cls=TCLink, bw=1 ) # NET 3
-    net.addLink( net[ 'hb' ], net[ 'r4' ], intfName1='hb-eth1', intfName2='r4-eth1', cls=TCLink, bw=1 ) # NET 4
-    net.addLink( net[ 'r4' ], net[ 'r2' ], intfName1='r4-eth0', intfName2='r2-eth0', cls=TCLink, bw=0.5 ) # NET 5
-    net.addLink( net[ 'ha' ], net[ 'r2' ], intfName1='ha-eth1', intfName2='r2-eth1', cls=TCLink, bw=1 ) # NET 6
-    net.addLink( net[ 'r1' ], net[ 'r4' ], intfName1='r1-eth2', intfName2='r4-eth2', cls=TCLink, bw=1 ) # NET 7
-    net.addLink( net[ 'r2' ], net[ 'r3' ], intfName1='r2-eth2', intfName2='r3-eth2', cls=TCLink, bw=1 ) # NET 8
+    net.addLink( net[ 'ha' ], net[ 'r1' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='ha-eth0', intfName2='r1-eth0', cls=TCLink, bw=1 ) # NET 1
+    net.addLink( net[ 'r1' ], net[ 'r3' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='r1-eth1', intfName2='r3-eth1', cls=TCLink, bw=0.5 ) # NET 2
+    net.addLink( net[ 'r3' ], net[ 'hb' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='r3-eth0', intfName2='hb-eth0', cls=TCLink, bw=1 ) # NET 3
+    net.addLink( net[ 'hb' ], net[ 'r4' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='hb-eth1', intfName2='r4-eth1', cls=TCLink, bw=1 ) # NET 4
+    net.addLink( net[ 'r4' ], net[ 'r2' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='r4-eth0', intfName2='r2-eth0', cls=TCLink, bw=0.5 ) # NET 5
+    net.addLink( net[ 'ha' ], net[ 'r2' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='ha-eth1', intfName2='r2-eth1', cls=TCLink, bw=1 ) # NET 6
+    net.addLink( net[ 'r1' ], net[ 'r4' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='r1-eth2', intfName2='r4-eth2', cls=TCLink, bw=1 ) # NET 7
+    net.addLink( net[ 'r2' ], net[ 'r3' ], max_queue_size=MAX_QUEUE_SIZE, intfName1='r2-eth2', intfName2='r3-eth2', cls=TCLink, bw=1 ) # NET 8
 
     net.build()
 
